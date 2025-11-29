@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewer Canzoniere</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-text">
+      <div class="header-title">Canzoniere ChordPro</div>
+      <div class="header-subtitle">Visualizza, trasponi e ingrandisci i brani .cho</div>
+    </div>
+    <button id="toggle-sidebar" class="ghost-button toggle-sidebar" type="button">Nascondi barra</button>
+  </header>
+
+  <main class="layout" id="layout">
+    <aside class="sidebar">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Brani dal repository</h2>
+          <button id="reload-songs" class="ghost-button" title="Ricarica lista">↻</button>
+        </div>
+        <label class="field">
+          <span>Cerca</span>
+          <input type="search" id="search-input" placeholder="Titolo o nome file" aria-label="Cerca brano">
+        </label>
+        <div id="song-list" class="song-list" role="list" aria-live="polite"></div>
+        <button id="download-zip" class="primary-button" type="button">Scarica tutto in ZIP</button>
+        <p class="help-text">Il pulsante ZIP scarica l'intera cartella <code>songs</code>. È qui sotto l'elenco dei brani.</p>
+        <p id="download-status" class="help-text" aria-live="polite"></p>
+      </section>
+
+      <section class="panel">
+        <h2>Carica un file .cho</h2>
+        <p class="help-text">Il file non verrà salvato: viene solo visualizzato nel browser.</p>
+        <label class="upload">
+          <input type="file" id="file-input" accept=".cho,.chordpro,.txt" aria-label="Carica file .cho">
+          <span class="upload-label">Scegli file</span>
+        </label>
+      </section>
+
+      <section class="panel controls" aria-live="polite">
+        <h2>Controlli</h2>
+        <div class="control-group">
+          <div class="control-label">Trasponi accordi</div>
+          <div class="button-row">
+            <button id="transpose-down" class="icon-button" aria-label="Trasponi verso il basso">−</button>
+            <div id="transpose-value" class="value-pill">0</div>
+            <button id="transpose-up" class="icon-button" aria-label="Trasponi verso l'alto">+</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="control-label">Zoom testo</div>
+          <div class="button-row">
+            <button id="zoom-out" class="icon-button" aria-label="Riduci zoom">−</button>
+            <div id="zoom-value" class="value-pill">100%</div>
+            <button id="zoom-in" class="icon-button" aria-label="Aumenta zoom">+</button>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+    <section class="viewer">
+      <div class="viewer-tools">
+        <label for="scroll-slider">Scorri testo</label>
+        <input type="range" id="scroll-slider" min="0" value="0" step="1" aria-label="Scorri il testo del brano">
+      </div>
+      <div id="status" class="status">Seleziona un brano dal repository o carica un file .cho.</div>
+      <article id="song-viewer" class="song-viewer" hidden>
+        <header class="song-header">
+          <h1 id="song-title"></h1>
+          <p id="song-subtitle" class="song-subtitle" hidden></p>
+        </header>
+        <div id="song-scroll" class="song-scroll">
+          <div id="song-body" class="song-body"></div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+</body>
+</html>
