@@ -12,8 +12,6 @@ const songSubtitleEl = document.getElementById('song-subtitle');
 const songBodyEl = document.getElementById('song-body');
 const songScrollEl = document.getElementById('song-scroll');
 const scrollSlider = document.getElementById('scroll-slider');
-const downloadZipBtn = document.getElementById('download-zip');
-const downloadStatusEl = document.getElementById('download-status');
 
 const transposeValueEl = document.getElementById('transpose-value');
 const zoomValueEl = document.getElementById('zoom-value');
@@ -103,81 +101,6 @@ function filterSongs(term) {
     song.name.toLowerCase().includes(query) || cleanTitle(song.name).toLowerCase().includes(query)
   );
   renderSongList();
-}
-
-function setDownloadStatus(message) {
-  if (!downloadStatusEl) return;
-  downloadStatusEl.textContent = message || '';
-}
-
-async function downloadSongsZip() {
-  if (!window.JSZip) {
-    setDownloadStatus('Libreria ZIP non disponibile.');
-    return;
-  }
-
-  const originalLabel = downloadZipBtn.textContent;
-  downloadZipBtn.disabled = true;
-  downloadZipBtn.textContent = 'Preparazione...';
-  setDownloadStatus('Preparo elenco brani...');
-
-  try {
-    if (!songs.length) {
-      await fetchSongs();
-    }
-
-    if (!songs.length) {
-      setDownloadStatus('Nessun brano disponibile dal repository pubblico.');
-      return;
-    }
-
-    const zip = new JSZip();
-    const folder = zip.folder('songs');
-    let successCount = 0;
-    const errors = [];
-
-    for (let i = 0; i < songs.length; i += 1) {
-      const song = songs[i];
-      setDownloadStatus(`Scarico ${i + 1}/${songs.length}: ${song.name}`);
-      try {
-        const res = await fetch(song.downloadUrl);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const text = await res.text();
-        folder.file(song.name, text);
-        successCount += 1;
-      } catch (err) {
-        errors.push(`${song.name} (${err.message})`);
-      }
-    }
-
-    if (successCount === 0) {
-      setDownloadStatus('Nessun file è stato scaricato. Riprova più tardi.');
-      return;
-    }
-
-    setDownloadStatus('Creo archivio ZIP...');
-    const blob = await zip.generateAsync({ type: 'blob' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'canzoniere_songs.zip';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
-
-    if (errors.length) {
-      setDownloadStatus(`Completato: ${successCount} file ok, ${errors.length} errori.`);
-    } else {
-      setDownloadStatus('Download completato.');
-      setTimeout(() => setDownloadStatus(''), 6000);
-    }
-  } catch (err) {
-    setDownloadStatus(`Errore durante il download: ${err.message}`);
-  } finally {
-    downloadZipBtn.disabled = false;
-    downloadZipBtn.textContent = originalLabel;
-  }
 }
 
 async function loadSongFromUrl(url, name) {
@@ -454,7 +377,6 @@ songScrollEl.addEventListener('scroll', () => {
 
 searchInput.addEventListener('input', (event) => filterSongs(event.target.value));
 reloadBtn.addEventListener('click', fetchSongs);
-downloadZipBtn.addEventListener('click', downloadSongsZip);
 
 fileInput.addEventListener('change', (event) => {
   const [file] = event.target.files;

@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Viewer Canzoniere</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -29,9 +28,6 @@
           <input type="search" id="search-input" placeholder="Titolo o nome file" aria-label="Cerca brano">
         </label>
         <div id="song-list" class="song-list" role="list" aria-live="polite"></div>
-        <button id="download-zip" class="primary-button" type="button">Scarica tutto in ZIP</button>
-        <p class="help-text">Il pulsante ZIP scarica l'intera cartella <code>songs</code>. È qui sotto l'elenco dei brani.</p>
-        <p id="download-status" class="help-text" aria-live="polite"></p>
       </section>
 
       <section class="panel">

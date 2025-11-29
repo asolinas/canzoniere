@@ -17,8 +17,7 @@ Il progetto è una pagina statica. Per visualizzarla senza dipendenze aggiuntive
    ```
 3. Apri il browser su http://localhost:3000 e carica la pagina `index.html`.
 
-> Nota: l'elenco dei brani viene caricato da GitHub. Assicurati di avere connessione a Internet per vedere la lista automatica e,
-> se serve, usa il pulsante "Scarica tutto in ZIP" (subito sotto l'elenco nella barra laterale) per salvare localmente la cartella `songs`.
+> Nota: l'elenco dei brani viene caricato da GitHub. Assicurati di avere connessione a Internet per vedere la lista automatica.
 
 ## Deploy su Netlify
 

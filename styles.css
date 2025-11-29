@@ -7,6 +7,7 @@
   --card: #f8fafc;
   --lyric-size: 18px;
   --chord-size: 15px;
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
 }
 
 * {
@@ -22,13 +23,18 @@ body {
 }
 
 .app-header {
-  padding: 16px 24px;
+  position: sticky;
+  top: 0;
+  padding: 14px 20px;
   border-bottom: 1px solid var(--border);
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  flex-wrap: wrap;
+  z-index: 20;
 }
 
 .header-text {
@@ -49,9 +55,11 @@ body {
 
 .layout {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: clamp(260px, 28vw, 340px) 1fr;
   gap: 16px;
   padding: 16px 20px 32px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .layout.sidebar-collapsed {
@@ -74,7 +82,7 @@ body {
   border-radius: 10px;
   padding: 20px;
   min-height: 70vh;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -85,7 +93,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 14px 14px 16px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow);
 }
 
 .panel-header {
@@ -119,37 +127,9 @@ body {
   margin-top: 12px;
   border: 1px solid var(--border);
   border-radius: 10px;
-  max-height: 280px;
+  max-height: 320px;
   overflow: auto;
   background: var(--card);
-}
-
-.primary-button {
-  margin-top: 10px;
-  width: 100%;
-  border: none;
-  border-radius: 10px;
-  background: var(--accent);
-  color: #fff;
-  font-weight: 700;
-  padding: 12px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  box-shadow: 0 10px 24px rgba(31, 111, 235, 0.15);
-  transition: filter 0.15s ease, transform 0.15s ease;
-}
-
-.primary-button:hover {
-  filter: brightness(0.95);
-  transform: translateY(-1px);
-}
-
-.primary-button:disabled {
-  opacity: 0.7;
-  cursor: progress;
-  filter: grayscale(0.15);
-  transform: none;
-  box-shadow: none;
 }
 
 .song-item {
@@ -348,11 +328,13 @@ body {
   height: 36px;
   padding: 0 12px;
   white-space: nowrap;
+  box-shadow: var(--shadow);
 }
 
 @media (max-width: 960px) {
   .layout {
     grid-template-columns: 1fr;
+    padding: 14px 16px 24px;
   }
 
   .sidebar {
@@ -361,5 +343,31 @@ body {
 
   .viewer {
     order: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-header {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .toggle-sidebar {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 30;
+    background: #1f2937;
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  }
+
+  .viewer {
+    padding: 16px;
+  }
+
+  .song-scroll {
+    max-height: 60vh;
   }
 }
