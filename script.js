@@ -1,4 +1,6 @@
 const SONGS_API = 'https://api.github.com/repos/asolinas/canzoniere/contents/songs';
+const layoutEl = document.getElementById('layout');
+const toggleSidebarBtn = document.getElementById('toggle-sidebar');
 const songListEl = document.getElementById('song-list');
 const searchInput = document.getElementById('search-input');
 const reloadBtn = document.getElementById('reload-songs');
@@ -8,6 +10,8 @@ const songViewer = document.getElementById('song-viewer');
 const songTitleEl = document.getElementById('song-title');
 const songSubtitleEl = document.getElementById('song-subtitle');
 const songBodyEl = document.getElementById('song-body');
+const songScrollEl = document.getElementById('song-scroll');
+const scrollSlider = document.getElementById('scroll-slider');
 const downloadZipBtn = document.getElementById('download-zip');
 const downloadStatusEl = document.getElementById('download-status');
 
@@ -24,10 +28,25 @@ let currentSong = null;
 let transposeSteps = 0;
 let zoomPercent = 100;
 
+function toggleSidebar() {
+  const collapsed = layoutEl.classList.toggle('sidebar-collapsed');
+  toggleSidebarBtn.textContent = collapsed ? 'Mostra barra' : 'Nascondi barra';
+}
+
+function updateScrollSlider() {
+  if (!songScrollEl || !scrollSlider) return;
+  const max = Math.max(songScrollEl.scrollHeight - songScrollEl.clientHeight, 0);
+  scrollSlider.max = max;
+  scrollSlider.value = songScrollEl.scrollTop;
+  scrollSlider.disabled = max === 0;
+}
+
 function showStatus(message) {
   statusEl.textContent = message;
   statusEl.hidden = false;
   songViewer.hidden = true;
+  scrollSlider.value = 0;
+  scrollSlider.disabled = true;
 }
 
 function showSong() {
@@ -356,6 +375,7 @@ function renderSong(song) {
   });
 
   updateZoom();
+  requestAnimationFrame(updateScrollSlider);
 }
 
 const CHROMATIC = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -413,12 +433,23 @@ zoomInBtn.addEventListener('click', () => {
   zoomPercent = Math.min(zoomPercent + 10, 200);
   updateControlDisplays();
   updateZoom();
+  updateScrollSlider();
 });
 
 zoomOutBtn.addEventListener('click', () => {
   zoomPercent = Math.max(zoomPercent - 10, 60);
   updateControlDisplays();
   updateZoom();
+  updateScrollSlider();
+});
+
+toggleSidebarBtn.addEventListener('click', toggleSidebar);
+scrollSlider.addEventListener('input', (event) => {
+  songScrollEl.scrollTop = Number(event.target.value);
+});
+songScrollEl.addEventListener('scroll', () => {
+  if (scrollSlider.disabled) return;
+  scrollSlider.value = songScrollEl.scrollTop;
 });
 
 searchInput.addEventListener('input', (event) => filterSongs(event.target.value));

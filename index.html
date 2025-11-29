@@ -10,11 +10,14 @@
 </head>
 <body>
   <header class="app-header">
-    <div class="header-title">Canzoniere ChordPro</div>
-    <div class="header-subtitle">Visualizza, trasponi e ingrandisci i brani .cho</div>
+    <div class="header-text">
+      <div class="header-title">Canzoniere ChordPro</div>
+      <div class="header-subtitle">Visualizza, trasponi e ingrandisci i brani .cho</div>
+    </div>
+    <button id="toggle-sidebar" class="ghost-button toggle-sidebar" type="button">Nascondi barra</button>
   </header>
 
-  <main class="layout">
+  <main class="layout" id="layout">
     <aside class="sidebar">
       <section class="panel">
         <div class="panel-header">
@@ -62,13 +65,19 @@
     </aside>
 
     <section class="viewer">
+      <div class="viewer-tools">
+        <label for="scroll-slider">Scorri testo</label>
+        <input type="range" id="scroll-slider" min="0" value="0" step="1" aria-label="Scorri il testo del brano">
+      </div>
       <div id="status" class="status">Seleziona un brano dal repository o carica un file .cho.</div>
       <article id="song-viewer" class="song-viewer" hidden>
         <header class="song-header">
           <h1 id="song-title"></h1>
           <p id="song-subtitle" class="song-subtitle" hidden></p>
         </header>
-        <div id="song-body" class="song-body"></div>
+        <div id="song-scroll" class="song-scroll">
+          <div id="song-body" class="song-body"></div>
+        </div>
       </article>
     </section>
   </main>
