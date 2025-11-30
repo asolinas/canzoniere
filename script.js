@@ -30,8 +30,8 @@ let zoomPercent = 100;
 let autoScrollActive = false;
 let lastAutoScrollTick = null;
 const DEFAULT_SCROLL_SPEED = 30;
-const MIN_SCROLL_SPEED = 3;
-const MAX_SCROLL_SPEED = 28;
+const MIN_SCROLL_DURATION = 240; // seconds to scroll entire song at slider value 0 (lentissimo)
+const MAX_SCROLL_DURATION = 60; // seconds to scroll entire song at slider value 100 (veloce)
 
 scrollSlider.value = DEFAULT_SCROLL_SPEED;
 scrollSlider.disabled = true;
@@ -377,12 +377,7 @@ function stepAutoScroll(timestamp) {
 
   const deltaSeconds = (timestamp - lastAutoScrollTick) / 1000;
   lastAutoScrollTick = timestamp;
-  const speedPercent = Number(scrollSlider.value) || 0;
-  const normalized = Math.min(Math.max(speedPercent / 100, 0), 1);
-  const pixelsPerSecond =
-    speedPercent === 0
-      ? 0
-      : MIN_SCROLL_SPEED + normalized * (MAX_SCROLL_SPEED - MIN_SCROLL_SPEED);
+  const pixelsPerSecond = getScrollSpeed();
   songScrollEl.scrollTop += pixelsPerSecond * deltaSeconds;
 
   const atBottom =
@@ -400,6 +395,19 @@ function stepAutoScroll(timestamp) {
 function updateAutoScrollButtons() {
   scrollPlayBtn.disabled = autoScrollActive || !currentSong;
   scrollPauseBtn.disabled = !autoScrollActive;
+}
+
+function getScrollSpeed() {
+  if (!currentSong) return 0;
+  const distance = songScrollEl.scrollHeight - songScrollEl.clientHeight;
+  if (distance <= 0) return 0;
+
+  const sliderValue = Math.min(Math.max(Number(scrollSlider.value) || 0, 0), 100);
+  const durationRange = MIN_SCROLL_DURATION - MAX_SCROLL_DURATION;
+  const durationSeconds = MIN_SCROLL_DURATION - (sliderValue / 100) * durationRange;
+
+  // Pixels per second based on desired duration for the full scroll distance.
+  return distance / durationSeconds;
 }
 
 transposeUpBtn.addEventListener('click', () => {
@@ -432,6 +440,9 @@ scrollPlayBtn.addEventListener('click', startAutoScroll);
 scrollPauseBtn.addEventListener('click', stopAutoScroll);
 songScrollEl.addEventListener('pointerdown', stopAutoScroll);
 songScrollEl.addEventListener('wheel', stopAutoScroll, { passive: true });
+scrollSlider.addEventListener('input', () => {
+  if (autoScrollActive) lastAutoScrollTick = null;
+});
 
 searchInput.addEventListener('input', (event) => filterSongs(event.target.value));
 reloadBtn.addEventListener('click', fetchSongs);
