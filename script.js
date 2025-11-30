@@ -376,7 +376,7 @@ function stepAutoScroll(timestamp) {
   const deltaSeconds = (timestamp - lastAutoScrollTick) / 1000;
   lastAutoScrollTick = timestamp;
   const speedPercent = Number(scrollSlider.value) || 0;
-  const pixelsPerSecond = (speedPercent / 100) * 140;
+  const pixelsPerSecond = (speedPercent / 100) * 28;
   songScrollEl.scrollTop += pixelsPerSecond * deltaSeconds;
 
   const atBottom =
