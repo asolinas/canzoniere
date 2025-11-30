@@ -11,7 +11,7 @@
   <header class="app-header">
     <div class="header-text">
       <div class="header-title">Canzoniere ChordPro</div>
-      <div class="header-subtitle">Visualizza, trasponi e ingrandisci i brani .cho</div>
+      <div class="header-subtitle">Visualizza, trasponi e ingrandisci i brani ChordPro</div>
     </div>
   </header>
 
@@ -32,10 +32,10 @@
       </section>
 
       <section class="panel">
-        <h2>Carica un file .cho</h2>
+        <h2>Carica un file ChordPro</h2>
         <p class="help-text">Il file non verrà salvato: viene solo visualizzato nel browser.</p>
         <label class="upload">
-          <input type="file" id="file-input" accept=".cho,.chordpro,.txt" aria-label="Carica file .cho">
+          <input type="file" id="file-input" accept=".cho,.pro,.cpm,.chordpro,.txt" aria-label="Carica file ChordPro">
           <span class="upload-label">Scegli file</span>
         </label>
       </section>
@@ -63,15 +63,7 @@
     </aside>
 
     <section class="viewer">
-      <div class="viewer-tools">
-        <label for="scroll-slider">Velocità scorrimento</label>
-        <div class="scroll-controls">
-          <input type="range" id="scroll-slider" min="0" max="100" value="30" step="1" aria-label="Velocità di scorrimento automatica">
-          <button id="scroll-play" class="icon-button" type="button" aria-label="Avvia scorrimento">▶</button>
-          <button id="scroll-pause" class="icon-button" type="button" aria-label="Pausa scorrimento">⏸</button>
-        </div>
-      </div>
-      <div id="status" class="status">Seleziona un brano dal repository o carica un file .cho.</div>
+      <div id="status" class="status">Seleziona un brano dal repository o carica un file ChordPro.</div>
       <article id="song-viewer" class="song-viewer" hidden>
         <header class="song-header">
           <h1 id="song-title"></h1>
