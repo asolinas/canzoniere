@@ -30,6 +30,8 @@ let zoomPercent = 100;
 let autoScrollActive = false;
 let lastAutoScrollTick = null;
 const DEFAULT_SCROLL_SPEED = 30;
+const MIN_SCROLL_SPEED = 3;
+const MAX_SCROLL_SPEED = 28;
 
 scrollSlider.value = DEFAULT_SCROLL_SPEED;
 scrollSlider.disabled = true;
@@ -376,7 +378,11 @@ function stepAutoScroll(timestamp) {
   const deltaSeconds = (timestamp - lastAutoScrollTick) / 1000;
   lastAutoScrollTick = timestamp;
   const speedPercent = Number(scrollSlider.value) || 0;
-  const pixelsPerSecond = (speedPercent / 100) * 28;
+  const normalized = Math.min(Math.max(speedPercent / 100, 0), 1);
+  const pixelsPerSecond =
+    speedPercent === 0
+      ? 0
+      : MIN_SCROLL_SPEED + normalized * (MAX_SCROLL_SPEED - MIN_SCROLL_SPEED);
   songScrollEl.scrollTop += pixelsPerSecond * deltaSeconds;
 
   const atBottom =
