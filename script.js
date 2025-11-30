@@ -12,6 +12,8 @@ const songSubtitleEl = document.getElementById('song-subtitle');
 const songBodyEl = document.getElementById('song-body');
 const songScrollEl = document.getElementById('song-scroll');
 const scrollSlider = document.getElementById('scroll-slider');
+const scrollPlayBtn = document.getElementById('scroll-play');
+const scrollPauseBtn = document.getElementById('scroll-pause');
 
 const transposeValueEl = document.getElementById('transpose-value');
 const zoomValueEl = document.getElementById('zoom-value');
@@ -25,26 +27,32 @@ let filteredSongs = [];
 let currentSong = null;
 let transposeSteps = 0;
 let zoomPercent = 100;
+let autoScrollActive = false;
+let lastAutoScrollTick = null;
+const DEFAULT_SCROLL_SPEED = 30;
+
+scrollSlider.value = DEFAULT_SCROLL_SPEED;
+scrollSlider.disabled = true;
+scrollPlayBtn.disabled = true;
+scrollPauseBtn.disabled = true;
 
 function toggleSidebar() {
   const collapsed = layoutEl.classList.toggle('sidebar-collapsed');
-  toggleSidebarBtn.textContent = collapsed ? 'Mostra barra' : 'Nascondi barra';
-}
-
-function updateScrollSlider() {
-  if (!songScrollEl || !scrollSlider) return;
-  const max = Math.max(songScrollEl.scrollHeight - songScrollEl.clientHeight, 0);
-  scrollSlider.max = max;
-  scrollSlider.value = songScrollEl.scrollTop;
-  scrollSlider.disabled = max === 0;
+  toggleSidebarBtn.textContent = collapsed ? '>' : '<';
+  toggleSidebarBtn.setAttribute(
+    'aria-label',
+    collapsed ? 'Mostra barra laterale' : 'Nascondi barra laterale'
+  );
 }
 
 function showStatus(message) {
   statusEl.textContent = message;
   statusEl.hidden = false;
   songViewer.hidden = true;
-  scrollSlider.value = 0;
+  stopAutoScroll();
+  scrollSlider.value = DEFAULT_SCROLL_SPEED;
   scrollSlider.disabled = true;
+  updateAutoScrollButtons();
 }
 
 function showSong() {
@@ -118,10 +126,14 @@ async function loadSongFromUrl(url, name) {
 function handleSongContent(content, filename = 'Brano personalizzato') {
   transposeSteps = 0;
   zoomPercent = 100;
+  stopAutoScroll();
   updateControlDisplays();
   currentSong = parseChordPro(content, filename);
   renderSong(currentSong);
   showSong();
+  songScrollEl.scrollTop = 0;
+  scrollSlider.disabled = false;
+  updateAutoScrollButtons();
 }
 
 function parseChordPro(content, fallbackTitle) {
@@ -298,7 +310,6 @@ function renderSong(song) {
   });
 
   updateZoom();
-  requestAnimationFrame(updateScrollSlider);
 }
 
 const CHROMATIC = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -340,6 +351,51 @@ function updateZoom() {
   document.documentElement.style.setProperty('--chord-size', `${chordSize}px`);
 }
 
+function startAutoScroll() {
+  if (!currentSong || autoScrollActive) return;
+  autoScrollActive = true;
+  lastAutoScrollTick = null;
+  updateAutoScrollButtons();
+  requestAnimationFrame(stepAutoScroll);
+}
+
+function stopAutoScroll() {
+  autoScrollActive = false;
+  lastAutoScrollTick = null;
+  updateAutoScrollButtons();
+}
+
+function stepAutoScroll(timestamp) {
+  if (!autoScrollActive) return;
+  if (lastAutoScrollTick === null) {
+    lastAutoScrollTick = timestamp;
+    requestAnimationFrame(stepAutoScroll);
+    return;
+  }
+
+  const deltaSeconds = (timestamp - lastAutoScrollTick) / 1000;
+  lastAutoScrollTick = timestamp;
+  const speedPercent = Number(scrollSlider.value) || 0;
+  const pixelsPerSecond = (speedPercent / 100) * 140;
+  songScrollEl.scrollTop += pixelsPerSecond * deltaSeconds;
+
+  const atBottom =
+    Math.ceil(songScrollEl.scrollTop) >= songScrollEl.scrollHeight - songScrollEl.clientHeight;
+
+  if (atBottom) {
+    songScrollEl.scrollTop = songScrollEl.scrollHeight - songScrollEl.clientHeight;
+    stopAutoScroll();
+    return;
+  }
+
+  requestAnimationFrame(stepAutoScroll);
+}
+
+function updateAutoScrollButtons() {
+  scrollPlayBtn.disabled = autoScrollActive || !currentSong;
+  scrollPauseBtn.disabled = !autoScrollActive;
+}
+
 transposeUpBtn.addEventListener('click', () => {
   transposeSteps += 1;
   updateControlDisplays();
@@ -356,24 +412,20 @@ zoomInBtn.addEventListener('click', () => {
   zoomPercent = Math.min(zoomPercent + 10, 200);
   updateControlDisplays();
   updateZoom();
-  updateScrollSlider();
 });
 
 zoomOutBtn.addEventListener('click', () => {
   zoomPercent = Math.max(zoomPercent - 10, 60);
   updateControlDisplays();
   updateZoom();
-  updateScrollSlider();
 });
 
 toggleSidebarBtn.addEventListener('click', toggleSidebar);
-scrollSlider.addEventListener('input', (event) => {
-  songScrollEl.scrollTop = Number(event.target.value);
-});
-songScrollEl.addEventListener('scroll', () => {
-  if (scrollSlider.disabled) return;
-  scrollSlider.value = songScrollEl.scrollTop;
-});
+
+scrollPlayBtn.addEventListener('click', startAutoScroll);
+scrollPauseBtn.addEventListener('click', stopAutoScroll);
+songScrollEl.addEventListener('pointerdown', stopAutoScroll);
+songScrollEl.addEventListener('wheel', stopAutoScroll, { passive: true });
 
 searchInput.addEventListener('input', (event) => filterSongs(event.target.value));
 reloadBtn.addEventListener('click', fetchSongs);
