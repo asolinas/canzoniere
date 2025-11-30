@@ -62,6 +62,13 @@ function showSong() {
   songViewer.hidden = false;
 }
 
+const CHORDPRO_EXTENSIONS = ['.cho', '.pro', '.cpm'];
+
+function isChordProFile(name) {
+  const lower = name.toLowerCase();
+  return CHORDPRO_EXTENSIONS.some((ext) => lower.endsWith(ext));
+}
+
 async function fetchSongs() {
   songListEl.innerHTML = '<div class="song-item">Caricamento elenco...</div>';
   try {
@@ -69,7 +76,7 @@ async function fetchSongs() {
     if (!response.ok) throw new Error('Errore nella richiesta');
     const data = await response.json();
     songs = data
-      .filter((item) => item.type === 'file' && item.name.toLowerCase().endsWith('.cho'))
+      .filter((item) => item.type === 'file' && isChordProFile(item.name))
       .map((item) => ({
         name: item.name,
         path: item.path,
