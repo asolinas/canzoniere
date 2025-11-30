@@ -1,0 +1,103 @@
+{t:Come mai}
+{st:883 e Fiorello}
+{chords_size: 1}
+{chords_position: 1}
+{print_chords:yes}
+{print_major:yes}
+{print_minor:yes}
+{print_seventh:yes}
+{print_bemol:yes}
+{print_bass_not_root:yes}
+{font:Title,Comic Sans MS, 20, 0,true,false}
+{font:SubTitle,Comic Sans MS, 16, 0,true,false}
+{font:Lyric,Comic Sans MS, 10, 0,false,false}
+{font:Chord,Arial, 8, 255,false,true}
+{font:Comment,Comic Sans MS, 8, 16711680,false,false}
+{font:Tablature,Courier New, 10, 65280,false,false}
+{font:Header,Comic Sans MS, 10, 0,true,false}
+{font:Footer,Comic Sans MS, 10, 0,true,false}
+{font:Control,MS Sans Serif, 8, 16711680,false,false}
+{left_margin: 800}
+{right_margin: 600}
+{top_margin: 1000}
+{botton_margin: 1000}
+{print_orientation: 1}
+# by Maurizio Codogno (mau@beatles.cselt.stet.it)
+{start_of_tab}
+
+E||------20--20-----------20--20-------|
+B||--18------------18-17---------------|
+G||---------------------------------17-|
+D||------------------------------------|
+A||------------------------------------|
+E||------------------------------------|
+
+
+                                                                              
+------20----20-17----17-----15--17--|--18--17--17--15-17-15--13-----------13-|
+------------------20----------------|---------------------------13-----13----|
+--15--------------------------------|----------------------------------------|
+------------------------------------|----------------------------------------|
+------------------------------------|----------------------------------------|
+------------------------------------|----------------------------------------|
+
+
+                                     
+--17--15--15---13--13---13---------||
+-----------------------------------||
+-----------------------------------||
+-----------------------------------||
+-----------------------------------||
+-----------------------------------||
+
+{end_of_tab}
+
+
+[F] [C/E] [Bb] [F] [Bb] [F] [C] [F]
+Le [F]notti non fi[Dm]niscono all'[Bb]alba nella [C]via
+Le [F]porto a casa in[Dm]sieme a me ne [Bb]faccio melo[C]dia
+E [Bb]poi mi trovo a s[C]crivere chi[Dm]lometri di [F/A]lettere
+Spe[Bb]rando di vederti ancora [C]qui
+
+Inutile parlare sai non capiresti mai
+Seguirti fino all'alba e poi vedere dove vai
+Mi sento un po' bambino ma lo so con te non finirà
+Il sogno di sentirsi dentro a un film
+
+E [Bb]poi all'improv[F]viso sei [Bb]arrivata [F]tu
+Non [Bb]so chi l'ha de[F]ciso m'hai [C]preso sempre più
+Una [Bb]quotidiana [F]guerra con la [Bb]razionali[F]tà
+Ma va [Bb]bene purché [F]serva per [Gm7]farmi us[C]cire
+
+{start_of_chorus}
+[F]Come mai ma [C/E]chi sarai per [Bb]fare questo a [F]me
+Notti in[Bb]tere ad aspet[F]tarti ad [Gm7]aspettare [C]te
+Dimmi [F]come mai ma [C/E]chi sarai per [Bb]farmi stare [F]qui
+Qui se[Bb]duto in una [F]stanza pre[C]gando per un [F]sì
+{end_of_chorus}
+
+Gli amici se sapessero che sono proprio io
+Pensare che credevano che fossi quasi un dio
+Perché non mi fermavo mai nessuna storia inutile
+Uccidersi d'amore ma per chi
+
+Lo sai all'improvviso sei arrivata tu
+Non so chi l'ha deciso m'hai preso sempre più
+Una quotidiana guerra con la razionalità
+Ma va bene purché serva per farmi uscire
+
+{start_of_chorus}
+Come mai ma chi sarai per fare questo a me
+Notti intere ad aspettarti ad aspettare te
+Dimmi come mai ma chi sarai per farmi stare qui
+Qui seduto in una stanza pregando per un sì
+{end_of_chorus}
+
+{start_of_chorus}
+Come mai ma chi sarai per fare questo a me
+Notti intere ad aspettarti ad aspettare te
+Dimmi come mai ma chi sarai per farmi stare qui
+Qui seduto in una stanza pregando per un sì
+{end_of_chorus}
+
+

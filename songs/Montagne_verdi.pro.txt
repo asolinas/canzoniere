@@ -1,0 +1,136 @@
+========
+From: "Angelo Giuntini" <a.giuntini@pisa.iol.it>
+Date: Wed, 18 Dec 2002 05:29:17 +0100
+--------
+
+
+{t:Montagne verdi}
+{st:Marcella}
+{chords_size: 1}
+{chords_position: 1}
+{print_chords:yes}
+{print_major:yes}
+{print_minor:yes}
+{print_seventh:yes}
+{print_bemol:yes}
+{print_bass_not_root:yes}
+{font:Title,Comic Sans MS, 20, 0,true,false}
+{font:SubTitle,Comic Sans MS, 16, 0,true,false}
+{font:Lyric,Courier New, 10, 0,false,false}
+{font:Chord,Arial, 8, 255,true,false}
+{font:Comment,Comic Sans MS, 8, 16711680,false,false}
+{font:Tablature,Courier New, 10, 65280,false,false}
+{font:Header,Comic Sans MS, 10, 0,true,false}
+{font:Footer,Comic Sans MS, 10, 0,true,false}
+{font:Control,MS Sans Serif, 8, 16711680,false,false}
+{left_margin: 800}
+{right_margin: 600}
+{top_margin: 1000}
+{botton_margin: 1000}
+{print_orientation: 1}
+{two_column_on}
+
+[G] [D] [Em] [Bm] [G] [D] [A]
+Mi ri[D]cordo montagne verdi
+e le [Em7]corse di una bambina
+con l'amico mio piu' sincero
+un co[D]niglio dal muso nero.
+
+[G]Poi [A]un [D]giorno mi prese il treno
+[G]l'er[B]ba, il [Em]prato e quello che era mio
+sco[B7]mpa[Em7]rivano piano piano
+[A7]e pian[D]gendo parlai con Dio.
+
+Qu[G]ant[A]e v[D]olte ho cercato il sole
+qua[G]nt[B]e v[Em]olte ho mangiato sale
+l[B7]a citt[Em7]a' aveva mille sguardi
+i[A7]o sogn[D]avo montagne verdi.
+
+[G]  Il mio de[D]stino [Em]e' di stare accanto a [Bm]te
+[G]  con te vi[D]cino piu' pa[Em]ura non av[Bm]ro'
+[G]  e un po' [D]bambina torne[A]ro'.
+
+Mi ric[D]ordo montagne verdi
+quella s[Em7]era negli occhi tuoi
+quando hai detto, "si e' fatto tardi,
+t'accomp[D]agno se tu lo vuoi".
+{column_break}
+
+N[G]ell[A]a n[D]ebbia le tue parole
+l[G]a t[B]ua st[Em]oria e' la mia storia
+p[B7]oi nel b[Em7]uio senza parlare
+h[A7]o dorm[D]ito con te sul cuore.
+
+[G]Io t[A]i [D]amo mio grande amore
+[G]Io t[B]i [Em]amo mio primo amore
+qu[B7]ante v[Em7]olte ho cercato il sole
+qu[A7]ante v[D]olte ho cercato il sole.
+
+[G]La [A]la [D]la la la la la la la
+[G]la [B]la [Em]la la la la la la la
+[B7]la la [Em7]la la la la la la la
+[A7]la la [D]la la la la la la la
+
+[G]  Il mio de[D]stino [Em]e' di stare accanto a [Bm]te
+[G]  con te vi[D]cino piu' pa[Em]ura non av[Bm]ro'
+[G]e un po' piu' d[D]onna io sar[A]o'.
+
+[G]  Montagne [D]verdi
+nei tuoi [Em]occhi [A7]rived[D]ro'.
+
+
+
+# by Maurizio Codogno (mau@beatles.cselt.stet.it)
+{title: Montagne verdi}
+{subtitle: Marcella}
+[G] [D] [Em] [Bm] [G] [D] [A]
+Mi ri[D]cordo montagne verdi
+e le [Em7]corse di una bambina
+con l'amico mio più sincero
+un co[D]niglio dal muso nero.
+
+[G]Poi [A]un [D]giorno mi prese il treno
+[G]l'er[A]ba, il [Em]prato e quello che era mio
+sco[B7]mpa[Em7]rivano piano piano
+[A7]e pian[D]gendo parlai con Dio.
+
+Quante volte ho cercato il sole
+quante volte ho mangiato sale
+la città aveva mille sguardi
+io sognavo montagne verdi.
+
+{soc}
+[G]  Il mio de[D]stino [Em]è di stare accanto a [Bm]te
+[G]  con te vi[D]cino più pa[Em]ura non av[Bm]rò
+[G]  e un po' [D]bambina torne[A]rò.
+{eoc}
+
+Mi ricordo montagne verdi
+quella sera negli occhi tuoi
+quando hai detto, "si è fatto tardi,
+t'accompagno se tu lo vuoi".
+
+Nella nebbia le tue parole
+la tua storia è la mia storia
+poi nel buio senza parlare
+ho dormito con te sul cuore.
+
+Io ti amo mio grande amore
+Io ti amo mio primo amore
+quante volte ho cercato il sole
+quante volte ho cercato il sole.
+
+La la la la la la la la la 
+la la la la la la la la la
+la la la la la la la la la
+la la la la la la la la la
+
+{soc}
+Il mio destino è di stare accanto a te
+con te vicino più paura non avrò
+e un po' più donna io sarò.
+{eoc}
+
+[G]  Montagne [D]verdi
+nei tuoi [Em]occhi [A7sus4]rived[D]rò.
+

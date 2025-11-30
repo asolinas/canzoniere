@@ -1,0 +1,61 @@
+========
+From: "Luciano.Pulvirenti" <Luciano.Pulvirenti@ctonline.it>
+Date: Mon, 21 Jun 1999 10:23:46 +0200
+
+In collaborazione con Angelo Giuntini per il testo
+
+{t:Nel sole}
+{st:Al Bano}
+{chords_size: 1}
+{chords_position: 1}
+{print_chords:no}
+{print_major:no}
+{print_minor:no}
+{print_seventh:no}
+{print_bemol:no}
+{print_bass_not_root:no}
+{font:Title,Comic Sans MS, 20, 0,true,false}
+{font:SubTitle,Comic Sans MS, 16, 0,true,false}
+{font:Lyric,Comic Sans MS, 10, 0,false,false}
+{font:Chord,Arial, 9, 255,true,true}
+{font:Comment,Comic Sans MS, 8, 16711680,false,false}
+{font:Tablature,Courier New, 10, 65280,false,false}
+{font:Header,Comic Sans MS, 10, 0,true,false}
+{font:Footer,Comic Sans MS, 10, 0,true,false}
+{font:Control,MS Sans Serif, 8, 16711680,false,false}
+{left_margin: 800}
+{right_margin: 600}
+{top_margin: 1000}
+{botton_margin: 1000}
+{print_orientation: 1}
+
+[Dm]Perche', ma per[Dm7]che' questa not[F]te,
+ha le ore p[Dm]iu' lunghe
+che [Dm7]non passano m[F]ai,
+[Bb]ma perche' ogni minu[Dm]to
+[Bb]dura un'eterni[A4]ta'.
+[D]Quando il [G]sole torne[D]ra'
+e nel [G]sole io ver[F#m]ro' da te
+[Em]un altro uomo trover[F#m]ai in [Bm]me
+[E7]e che non puo' piu' fare a [A]meno di [A7]te.
+[D]Quando il [G]sole torne[D]ra'
+e nel [G]sole io ver[F#m]ro' da te
+[Em]amore, amore cor[F#m]ri incontro a [Bm]me
+e la [E7]notte non ver[A7]ra' mai pi[D]u'.[Dm]
+
+Ma perche', ma perche' i miei pensieri
+sono sempre gli stessi
+e non cambiano mai,
+ma perche' anche il silenzio
+sta parlandomi di te.
+
+Quando il sole tornera'
+e nel sole io verro' da te
+amore, amore corri incontro a me
+e la notte non verra' mai piu'.
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+{t:La donna cannone}
+{st:Francesco De Gregori}
+{font:Title,Arial,41,0,false,false}
+{font:SubTitle,Arial,26,0,false,false}
+{font:Lyric,Arial,24,0,false,false}
+{font:Chorus,Arial,24,0,false,false}
+{font:Chord,Arial,24,0,false,true}
+{font:Comment,Arial,18,0,false,false}
+{font:Tablature,Monaco,17,0,false,false}
+{font:Editor,Monaco,14,0,false,false}
+{color:Title,0.000000,0.000000,0.000000,1.000000}
+{color:SubTitle,0.400000,0.400000,0.400000,1.000000}
+{color:Lyric,0.200000,0.200000,0.200000,1.000000}
+{color:Chorus,0.000000,0.000000,0.000000,1.000000}
+{color:Chord,0.501961,0.000000,0.000000,1.000000}
+{color:Comment,0.400000,0.400000,0.400000,1.000000}
+{color:Tablature,0.000000,0.000000,0.000000,1.000000}
+{color:Editor,0.000000,0.000000,0.000000,1.000000}
+{color:EditorBack,1.000000,1.000000,1.000000,1.000000}
+{color:Background,1.000000,1.000000,1.000000,1.000000}
+{color:Highlight,1.000000,1.000000,0.000000,1.000000}
+{chordChartSize:56.031250}{playtime:120}
+{chorusindent:32}
+{chordspace:3}
+{linespace:0}
+{transpositionLevel:0}
+
+[F][G][C][F][C][G][F]   [F][G][C][F][C][G][F][Gsus4]
+[C]  Butterт questo mio enorme cuore tra le stelle un giorno [C7+]giuro che
+lo farт
+e oltre l'[Gm6]azzurro della tenda nell'azzurro io [A7]volerт
+[Ab]  Quando la donna cannone d'oro e d'ar[Cm]gento diventerа
+senza pas[G]sare per la stazione l'ultimo [G7]treno prenderа.
+[C][G][C][G][C]
+
+[C]In faccia ai maligni e ai superbi il mio [C7+]nome scintillerа
+dalle [Gm6]porte della notte il giorno si [A7]bloccherа
+[Ab]  un applauso del pubblico pagante lo [Cm]sottolineerа
+e dalla [G]bocca del cannone una [F]canzone suonerа.
+
+{start_of_chorus}
+[A]  E con le mani a[C#m/G#]more per le [F#m]mani ti prende[F#m/E]rт
+[G]  e senza dire parole nel mio [D]cuore ti porterт.
+[A]  E non avrт pa[A7]ura se non sarт [F#]bella come vuoi tu
+[G]  ma voleremo in cielo in carne e ossa [G7]non torneremo
+[C]piщ.[C7+][Am][Gm][C7][F]
+[Fm]  E senza fame senza sete [D7]e senza ali senza rete [G7]voleremo
+via.[F]
+{end_of_chorus}
+
+Cosi la donna cannone quell'enorme mistero volт
+sola verso un cielo nero nero s'incamminт.
+Tutti chiusero gli occhi nell'attimo esatto in cui sparм
+altri giurarono e spergiurarono che non erano mai stati lм.
+
+{start_of_chorus}
+E con le mani amore con le mani ti prenderт
+e senza dire parole nel mio cuore ti porterт.
+E non avrт paura se non sarт bella come dici tu
+ma voleremo in cielo in carne e ossa non torneremo piщ.
+E senza fame senza sete e senza aria senza rete voleremo via.
+{end_of_chorus}
+[F][G][C][F][C][G][F]   [F][G][C][F][C][G][F][Gsus4][C]

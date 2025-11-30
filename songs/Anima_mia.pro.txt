@@ -1,0 +1,61 @@
+========
+From: "Luciano Pulvirenti" <Luciano.Pulvirenti@ctonline.it>
+Date: Sat, 24 Jul 1999 17:33:35 +0200
+
+Chiedo umilmente scusa a chi avesse "raccattato" la versione
+precedente che aveva il ritornello sballato e alcuni
+accordi mancanti nelle strofe.
+Questa "dovrebbe" essere corretta.
+{t:Anima mia}
+{st:Cugini di campagna}
+{chords_size: 1}
+{chords_position: 1}
+{print_chords:no}
+{print_major:no}
+{print_minor:no}
+{print_seventh:no}
+{print_bemol:no}
+{print_bass_not_root:no}
+{font:Title,Comic Sans MS, 20, 0,true,false}
+{font:SubTitle,Comic Sans MS, 16, 0,true,false}
+{font:Lyric,Comic Sans MS, 10, 0,false,false}
+{font:Chord,Arial, 8, 255,false,true}
+{font:Comment,Comic Sans MS, 8, 16711680,false,false}
+{font:Tablature,Courier New, 10, 65280,false,false}
+{font:Header,Comic Sans MS, 10, 0,true,false}
+{font:Footer,Comic Sans MS, 10, 0,true,false}
+{font:Control,MS Sans Serif, 8, 16711680,false,false}
+{left_margin: 800}
+{right_margin: 600}
+{top_margin: 1000}
+{botton_margin: 1000}
+{print_orientation: 1}
+[D]Andava a piedi [Dmaj7]nudi per la stra[Bm]da[Bm7]
+[Em]mi vide come un'[Em7]ombra mi se[A]guì[A+2][A]
+[G]con viso in alto d[Em]i chi il mondo sf[A]ida[A+2][A]
+[Em]e tiene ai piedi [A]un uomo per un [D]sì[A7]
+
+Nel cuore aveva un volo di gabbiani
+un corpo di chi ha detto troppi sì
+negli occhi la paura del domani
+come un ragazzo me ne innamorai
+
+La notte lei dormiva sul mio petto
+sentivo il suo respiro su di me
+e poi mi dava i calci dentro il letto
+[Em]ho ancora il suo sap[A]ore qui con [Dm]me
+
+[Dm]Anima [Bbmaj7]mia,      [C7]torna a casa t[Am]ua
+[Dm7]ti aspette[Gm]rò dovessi o[C7]diare queste [F]mura
+[Dm]Anima [Bbmaj7]mia,     [C7]nella stanza [Am]tua
+[Dm7]c'è ancora il [Gm]letto come l[C7]'hai lasciato [D]tu[A7]
+
+Avrei soltanto voglia di sapere
+che fine ha fatto e chi sta con lei
+se sente ancora freddo nella notte
+se ha sciolto i suoi capelli oppure no
+
+Anima mia ...
+
+
+

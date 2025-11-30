@@ -1,0 +1,73 @@
+========
+From: "Sephiroth" <sephiroth@WOOtiscalinet.it>
+Date: Sun, 3 Oct 1999 22:01:25 +0200
+--------
+{t:PER ELISA}
+{st:Alice}
+{chords_size: 1}
+{chords_position: 1}
+{print_chords:yes}
+{print_major:yes}
+{print_minor:yes}
+{print_seventh:yes}
+{print_bemol:yes}
+{print_bass_not_root:yes}
+{font:Title,Comic Sans MS, 20, 0,true,false}
+{font:SubTitle,Comic Sans MS, 16, 0,true,false}
+{font:Lyric,Comic Sans MS, 10, 0,false,false}
+{font:Chord,Arial, 8, 255,false,true}
+{font:Comment,Comic Sans MS, 8, 16711680,false,false}
+{font:Tablature,Courier New, 10, 65280,false,false}
+{font:Header,Comic Sans MS, 10, 0,true,false}
+{font:Footer,Comic Sans MS, 10, 0,true,false}
+{font:Control,MS Sans Serif, 8, 16711680,false,false}
+{left_margin: 800}
+{right_margin: 600}
+{top_margin: 1000}
+{botton_margin: 1000}
+{print_orientation: 1}
+{comment:Autori : Alice * Battiato * Pio}
+
+[C]Per E[G]lisa, v[F]uoi vedere [G]che perderai anche [C]me
+Per E[G]lisa [F]non sai più dist[G]inguere che g[C]iorno è [G]
+E p[F]oi non [G]è nemmeno b[C]ella  [G]    [F]   [G]
+[C]Per E[G]lisa p[F]aghi sempre [G]tu e non ti lam[C]enti
+per [G]lei ti m[F]etti in coda per le s[G]pese
+[C]e il gu[G]aio è [F]che non te ne acc[G]orgi  [C]   [G]    [F]   [G]
+
+[C]Con E[G]lisa gu[F]ardi le vet[G]rine e non ti stanc[C]hi
+[G]Lei [F]ti lascia e ti r[G]iprende come e [C]quando v[G]uole
+[Am]Lei riesce solo a f[F]arti m[G]ale.
+[C]Vivere, vivere, vivere non è più v[F]ivere
+[Am]Lei ti ha plagiato e ti ha preso anche la d[Dm]ignità
+
+{start_of_chorus}
+[C]Fingere, fingere, fingere non sai più f[F]ingere
+[C]Senza di lei, senza di Lei ti manca l'[G]aria
+{end_of_chorus}
+
+Senza Elisa non esci neanche a prendere il giornale
+Con me riesci solo a dire due parole
+Ma noi, un tempo ci amavamo
+Con Elisa guardi le vetrine e non ti stanchi
+Lei ti lascia e ti riprende come e quando vuole
+Lei riesce solo a farti male.
+
+{comment:[REPEAT CHORUS]}
+
+Per Elisa. Con Elisa.
+
+
+
+--
+Ciao e a presto!
+
+Fabio
+
+--------------------------------------------
+Per rispondere via E-mail,
+togli WOO dall'indirizzo.
+--------------------------------------------
+
+
+
