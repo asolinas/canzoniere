@@ -11,10 +11,6 @@ const songTitleEl = document.getElementById('song-title');
 const songSubtitleEl = document.getElementById('song-subtitle');
 const songBodyEl = document.getElementById('song-body');
 const songScrollEl = document.getElementById('song-scroll');
-const scrollSlider = document.getElementById('scroll-slider');
-const scrollPlayBtn = document.getElementById('scroll-play');
-const scrollPauseBtn = document.getElementById('scroll-pause');
-
 const transposeValueEl = document.getElementById('transpose-value');
 const zoomValueEl = document.getElementById('zoom-value');
 const transposeUpBtn = document.getElementById('transpose-up');
@@ -27,16 +23,7 @@ let filteredSongs = [];
 let currentSong = null;
 let transposeSteps = 0;
 let zoomPercent = 100;
-let autoScrollActive = false;
-let lastAutoScrollTick = null;
-const DEFAULT_SCROLL_SPEED = 30;
-const MIN_SCROLL_DURATION = 240; // seconds to scroll entire song at slider value 0 (lentissimo)
-const MAX_SCROLL_DURATION = 60; // seconds to scroll entire song at slider value 100 (veloce)
-
-scrollSlider.value = DEFAULT_SCROLL_SPEED;
-scrollSlider.disabled = true;
-scrollPlayBtn.disabled = true;
-scrollPauseBtn.disabled = true;
+const SONG_METADATA_CACHE = new Map();
 
 function toggleSidebar() {
   const collapsed = layoutEl.classList.toggle('sidebar-collapsed');
@@ -51,10 +38,6 @@ function showStatus(message) {
   statusEl.textContent = message;
   statusEl.hidden = false;
   songViewer.hidden = true;
-  stopAutoScroll();
-  scrollSlider.value = DEFAULT_SCROLL_SPEED;
-  scrollSlider.disabled = true;
-  updateAutoScrollButtons();
 }
 
 function showSong() {
@@ -75,7 +58,7 @@ async function fetchSongs() {
     const response = await fetch(SONGS_API);
     if (!response.ok) throw new Error('Errore nella richiesta');
     const data = await response.json();
-    songs = data
+    const baseSongs = data
       .filter((item) => item.type === 'file' && isChordProFile(item.name))
       .map((item) => ({
         name: item.name,
@@ -83,6 +66,8 @@ async function fetchSongs() {
         downloadUrl: item.download_url,
       }))
       .sort((a, b) => a.name.localeCompare(b.name));
+
+    songs = await enrichSongsWithMetadata(baseSongs);
     filteredSongs = songs;
     renderSongList();
   } catch (err) {
@@ -102,7 +87,13 @@ function renderSongList() {
     const item = document.createElement('button');
     item.className = 'song-item';
     item.role = 'listitem';
-    item.innerHTML = `<span class="song-item-title">${cleanTitle(song.name)}</span><small>${song.name}</small>`;
+    item.innerHTML = `
+      <div class="song-item-text">
+        <span class="song-item-title">${song.title}</span>
+        <small class="song-item-subtitle">${song.subtitle || '&mdash;'}</small>
+      </div>
+      <small class="song-item-file">${song.name}</small>
+    `;
     item.addEventListener('click', () => loadSongFromUrl(song.downloadUrl, song.name));
     songListEl.appendChild(item);
   });
@@ -112,11 +103,67 @@ function cleanTitle(name) {
   return name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
 }
 
+async function enrichSongsWithMetadata(baseSongs) {
+  const metadataPromises = baseSongs.map(async (song) => {
+    if (SONG_METADATA_CACHE.has(song.path)) {
+      return { ...song, ...SONG_METADATA_CACHE.get(song.path) };
+    }
+
+    try {
+      const response = await fetch(song.downloadUrl);
+      if (!response.ok) throw new Error('Errore nel download');
+      const content = await response.text();
+      const metadata = extractSongMetadata(content, song.name);
+      SONG_METADATA_CACHE.set(song.path, metadata);
+      return { ...song, ...metadata };
+    } catch (err) {
+      return { ...song, title: cleanTitle(song.name), subtitle: '' };
+    }
+  });
+
+  const enriched = await Promise.all(metadataPromises);
+  return enriched.map((song) => ({
+    ...song,
+    title: song.title || cleanTitle(song.name),
+    subtitle: song.subtitle || '',
+  }));
+}
+
+function extractSongMetadata(content, fallbackTitle) {
+  const lines = content.split(/\r?\n/);
+  const metadata = { title: cleanTitle(fallbackTitle), subtitle: '' };
+
+  for (const line of lines) {
+    const directiveMatch = line.match(/^\{\s*([^:}]+)\s*:?\s*(.*?)\s*}$/i);
+    if (!directiveMatch) continue;
+
+    const keyword = directiveMatch[1].toLowerCase();
+    const value = directiveMatch[2];
+
+    if ((keyword === 'title' || keyword === 't') && value) {
+      metadata.title = value;
+    }
+
+    if ((keyword === 'subtitle' || keyword === 'st') && value) {
+      metadata.subtitle = value;
+    }
+  }
+
+  return metadata;
+}
+
 function filterSongs(term) {
   const query = term.trim().toLowerCase();
-  filteredSongs = songs.filter((song) =>
-    song.name.toLowerCase().includes(query) || cleanTitle(song.name).toLowerCase().includes(query)
-  );
+  filteredSongs = songs.filter((song) => {
+    const searchableTitle = (song.title || '').toLowerCase();
+    const searchableSubtitle = (song.subtitle || '').toLowerCase();
+    return (
+      song.name.toLowerCase().includes(query) ||
+      cleanTitle(song.name).toLowerCase().includes(query) ||
+      searchableTitle.includes(query) ||
+      searchableSubtitle.includes(query)
+    );
+  });
   renderSongList();
 }
 
@@ -135,14 +182,11 @@ async function loadSongFromUrl(url, name) {
 function handleSongContent(content, filename = 'Brano personalizzato') {
   transposeSteps = 0;
   zoomPercent = 100;
-  stopAutoScroll();
   updateControlDisplays();
   currentSong = parseChordPro(content, filename);
   renderSong(currentSong);
   showSong();
   songScrollEl.scrollTop = 0;
-  scrollSlider.disabled = false;
-  updateAutoScrollButtons();
 }
 
 function parseChordPro(content, fallbackTitle) {
@@ -360,63 +404,6 @@ function updateZoom() {
   document.documentElement.style.setProperty('--chord-size', `${chordSize}px`);
 }
 
-function startAutoScroll() {
-  if (!currentSong || autoScrollActive) return;
-  autoScrollActive = true;
-  lastAutoScrollTick = null;
-  updateAutoScrollButtons();
-  requestAnimationFrame(stepAutoScroll);
-}
-
-function stopAutoScroll() {
-  autoScrollActive = false;
-  lastAutoScrollTick = null;
-  updateAutoScrollButtons();
-}
-
-function stepAutoScroll(timestamp) {
-  if (!autoScrollActive) return;
-  if (lastAutoScrollTick === null) {
-    lastAutoScrollTick = timestamp;
-    requestAnimationFrame(stepAutoScroll);
-    return;
-  }
-
-  const deltaSeconds = (timestamp - lastAutoScrollTick) / 1000;
-  lastAutoScrollTick = timestamp;
-  const pixelsPerSecond = getScrollSpeed();
-  songScrollEl.scrollTop += pixelsPerSecond * deltaSeconds;
-
-  const atBottom =
-    Math.ceil(songScrollEl.scrollTop) >= songScrollEl.scrollHeight - songScrollEl.clientHeight;
-
-  if (atBottom) {
-    songScrollEl.scrollTop = songScrollEl.scrollHeight - songScrollEl.clientHeight;
-    stopAutoScroll();
-    return;
-  }
-
-  requestAnimationFrame(stepAutoScroll);
-}
-
-function updateAutoScrollButtons() {
-  scrollPlayBtn.disabled = autoScrollActive || !currentSong;
-  scrollPauseBtn.disabled = !autoScrollActive;
-}
-
-function getScrollSpeed() {
-  if (!currentSong) return 0;
-  const distance = songScrollEl.scrollHeight - songScrollEl.clientHeight;
-  if (distance <= 0) return 0;
-
-  const sliderValue = Math.min(Math.max(Number(scrollSlider.value) || 0, 0), 100);
-  const durationRange = MIN_SCROLL_DURATION - MAX_SCROLL_DURATION;
-  const durationSeconds = MIN_SCROLL_DURATION - (sliderValue / 100) * durationRange;
-
-  // Pixels per second based on desired duration for the full scroll distance.
-  return distance / durationSeconds;
-}
-
 transposeUpBtn.addEventListener('click', () => {
   transposeSteps += 1;
   updateControlDisplays();
@@ -442,14 +429,6 @@ zoomOutBtn.addEventListener('click', () => {
 });
 
 toggleSidebarBtn.addEventListener('click', toggleSidebar);
-
-scrollPlayBtn.addEventListener('click', startAutoScroll);
-scrollPauseBtn.addEventListener('click', stopAutoScroll);
-songScrollEl.addEventListener('pointerdown', stopAutoScroll);
-songScrollEl.addEventListener('wheel', stopAutoScroll, { passive: true });
-scrollSlider.addEventListener('input', () => {
-  if (autoScrollActive) lastAutoScrollTick = null;
-});
 
 searchInput.addEventListener('input', (event) => filterSongs(event.target.value));
 reloadBtn.addEventListener('click', fetchSongs);
