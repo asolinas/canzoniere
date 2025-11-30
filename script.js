@@ -17,6 +17,7 @@ const transposeUpBtn = document.getElementById('transpose-up');
 const transposeDownBtn = document.getElementById('transpose-down');
 const zoomInBtn = document.getElementById('zoom-in');
 const zoomOutBtn = document.getElementById('zoom-out');
+const exportPdfBtn = document.getElementById('export-pdf');
 
 let songs = [];
 let filteredSongs = [];
@@ -404,6 +405,66 @@ function updateZoom() {
   document.documentElement.style.setProperty('--chord-size', `${chordSize}px`);
 }
 
+function exportCurrentSongToPdf() {
+  if (!currentSong) {
+    alert('Seleziona un brano da esportare.');
+    return;
+  }
+
+  const printWindow = window.open('', '_blank', 'noopener');
+  if (!printWindow) {
+    alert('Impossibile aprire la finestra di stampa.');
+    return;
+  }
+
+  const lyricSize = 18 * (zoomPercent / 100);
+  const chordSize = 15 * (zoomPercent / 100);
+  const subtitleHtml = songSubtitleEl.hidden
+    ? ''
+    : `<p class="song-subtitle">${songSubtitleEl.textContent}</p>`;
+
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html lang="it">
+      <head>
+        <meta charset="UTF-8" />
+        <title>${songTitleEl.textContent} - PDF</title>
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+          body { padding: 18px; }
+          .song-viewer { box-shadow: none; border: none; }
+          .song-scroll { max-height: none; overflow: visible; }
+          @media print {
+            body { margin: 0; }
+            .song-viewer { border: none; }
+          }
+        </style>
+      </head>
+      <body>
+        <article class="song-viewer">
+          <header class="song-header">
+            <h1>${songTitleEl.textContent}</h1>
+            ${subtitleHtml}
+          </header>
+          <div class="song-scroll">
+            <div class="song-body">${songBodyEl.innerHTML}</div>
+          </div>
+        </article>
+        <script>
+          document.documentElement.style.setProperty('--lyric-size', '${lyricSize}px');
+          document.documentElement.style.setProperty('--chord-size', '${chordSize}px');
+          window.addEventListener('load', () => {
+            window.print();
+            window.close();
+          });
+        </script>
+      </body>
+    </html>
+  `);
+
+  printWindow.document.close();
+}
+
 transposeUpBtn.addEventListener('click', () => {
   transposeSteps += 1;
   updateControlDisplays();
@@ -427,6 +488,8 @@ zoomOutBtn.addEventListener('click', () => {
   updateControlDisplays();
   updateZoom();
 });
+
+exportPdfBtn.addEventListener('click', exportCurrentSongToPdf);
 
 toggleSidebarBtn.addEventListener('click', toggleSidebar);
 
