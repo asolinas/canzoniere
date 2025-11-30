@@ -411,19 +411,23 @@ function exportCurrentSongToPdf() {
     return;
   }
 
-  const printWindow = window.open('', '_blank', 'noopener');
-  if (!printWindow) {
-    alert('Impossibile aprire la finestra di stampa.');
-    return;
-  }
-
   const lyricSize = 18 * (zoomPercent / 100);
   const chordSize = 15 * (zoomPercent / 100);
   const subtitleHtml = songSubtitleEl.hidden
     ? ''
     : `<p class="song-subtitle">${songSubtitleEl.textContent}</p>`;
 
-  printWindow.document.write(`
+  const iframe = document.createElement('iframe');
+  iframe.setAttribute('aria-hidden', 'true');
+  iframe.style.position = 'fixed';
+  iframe.style.right = '0';
+  iframe.style.bottom = '0';
+  iframe.style.width = '0';
+  iframe.style.height = '0';
+  iframe.style.border = '0';
+  iframe.style.visibility = 'hidden';
+
+  const html = `
     <!DOCTYPE html>
     <html lang="it">
       <head>
@@ -453,16 +457,21 @@ function exportCurrentSongToPdf() {
         <script>
           document.documentElement.style.setProperty('--lyric-size', '${lyricSize}px');
           document.documentElement.style.setProperty('--chord-size', '${chordSize}px');
-          window.addEventListener('load', () => {
-            window.print();
-            window.close();
-          });
         </script>
       </body>
-    </html>
-  `);
+    </html>`;
 
-  printWindow.document.close();
+  iframe.srcdoc = html;
+  iframe.onload = () => {
+    try {
+      iframe.contentWindow.focus();
+      iframe.contentWindow.print();
+    } finally {
+      setTimeout(() => iframe.remove(), 300);
+    }
+  };
+
+  document.body.appendChild(iframe);
 }
 
 transposeUpBtn.addEventListener('click', () => {
